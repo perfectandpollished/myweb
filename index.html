@@ -35,36 +35,61 @@
   <section id="servicios">
     <h2>Servicios</h2>
     <div class="servicios">
-      <div class="card">
+      <!-- Servicio 1 -->
+      <div class="card" onclick="abrirGaleria('grabado')">
         <h3>Grabado de Patente</h3>
         <p>Cumplimos con normativa vigente y entregamos mayor seguridad a tu vehículo.</p>
       </div>
-      <div class="card">
+
+      <!-- Servicio 2 -->
+      <div class="card" onclick="abrirGaleria('focos')">
         <h3>Pulido de Focos</h3>
         <p>Devuelve la claridad a los faros, mejora la visibilidad nocturna y aumenta la seguridad.</p>
       </div>
-      <div class="card">
-        <h3>Pulido de Carrocería</h3>
-        <p>Devuelve el brillo exterior del vehículo, eliminando imperfecciones y logrando un acabado renovado y elegante.</p>
-      </div>
-      <div class="card">
+
+      <!-- Servicio 3 -->
+      <div class="card" onclick="abrirGaleria('tapices')">
         <h3>Lavado de Tapices</h3>
         <p>Limpieza profunda que elimina manchas, suciedad y olores de los asientos y revestimientos.</p>
       </div>
-      <div class="card">
-        <h3>Scanner Automotriz</h3>
-        <p>Diagnóstico electrónico y mecánico preciso para prevenir y detectar fallas.</p>
-      </div>
-      <div class="card">
-        <h3>Humectación de Plásticos y Molduras</h3>
-        <p>Tratamiento que recupera y protege las superficies interiores y exteriores, evitando el desgaste y devolviendo un acabado renovado.</p>
-      </div>
-      <div class="card">
-        <h3>Abrillantado de Llantas y Emblemas</h3>
-        <p>Resalta los detalles más visibles del vehículo, entregando un aspecto limpio, elegante y moderno.</p>
-      </div>
     </div>
   </section>
+
+  <!-- Popup Galería Grabado de Patente -->
+  <div id="galeria-grabado" class="popup">
+    <span class="cerrar" onclick="cerrarGaleria('grabado')">&times;</span>
+    <a class="anterior" onclick="mover(-1, 'grabado')">&#10094;</a>
+    <a class="siguiente" onclick="mover(1, 'grabado')">&#10095;</a>
+    <div class="popup-contenido">
+      <img class="imagen-grabado" src="grabado1.jpg" alt="Grabado de patente">
+      <img class="imagen-grabado" src="grabado2.jpg" alt="Grabado de patente">
+      <img class="imagen-grabado" src="grabado3.jpg" alt="Grabado de patente">
+    </div>
+  </div>
+
+  <!-- Popup Galería Pulido de Focos -->
+  <div id="galeria-focos" class="popup">
+    <span class="cerrar" onclick="cerrarGaleria('focos')">&times;</span>
+    <a class="anterior" onclick="mover(-1, 'focos')">&#10094;</a>
+    <a class="siguiente" onclick="mover(1, 'focos')">&#10095;</a>
+    <div class="popup-contenido">
+      <img class="imagen-focos" src="foco1.jpg" alt="Pulido de focos">
+      <img class="imagen-focos" src="foco2.jpg" alt="Pulido de focos">
+      <img class="imagen-focos" src="foco3.jpg" alt="Pulido de focos">
+    </div>
+  </div>
+
+  <!-- Popup Galería Lavado de Tapices -->
+  <div id="galeria-tapices" class="popup">
+    <span class="cerrar" onclick="cerrarGaleria('tapices')">&times;</span>
+    <a class="anterior" onclick="mover(-1, 'tapices')">&#10094;</a>
+    <a class="siguiente" onclick="mover(1, 'tapices')">&#10095;</a>
+    <div class="popup-contenido">
+      <img class="imagen-tapices" src="tapiz1.jpg" alt="Lavado de tapices">
+      <img class="imagen-tapices" src="tapiz2.jpg" alt="Lavado de tapices">
+      <img class="imagen-tapices" src="tapiz3.jpg" alt="Lavado de tapices">
+    </div>
+  </div>
 
   <section id="beneficios">
     <h2>Beneficios</h2>
@@ -86,6 +111,35 @@
   <footer>
     <p>© 2025 Perfect and Pollished | Todos los derechos reservados</p>
   </footer>
+
+  <script>
+  let indices = {grabado: 0, focos: 0, tapices: 0};
+
+  function abrirGaleria(servicio) {
+    document.getElementById('galeria-' + servicio).style.display = 'block';
+    mostrarImagen(servicio, indices[servicio]);
+  }
+
+  function cerrarGaleria(servicio) {
+    document.getElementById('galeria-' + servicio).style.display = 'none';
+  }
+
+  function mover(n, servicio) {
+    indices[servicio] += n;
+    mostrarImagen(servicio, indices[servicio]);
+  }
+
+  function mostrarImagen(servicio, n) {
+    let i;
+    let imagenes = document.getElementsByClassName('imagen-' + servicio);
+    if (n >= imagenes.length) { indices[servicio] = 0; }
+    if (n < 0) { indices[servicio] = imagenes.length - 1; }
+    for (i = 0; i < imagenes.length; i++) {
+      imagenes[i].style.display = "none";
+    }
+    imagenes[indices[servicio]].style.display = "block";
+  }
+  </script>
 
 </body>
 </html>
